@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dgwqnujdsfe25"]
+
+[ext_resource type="Script" uid="uid://byfyfdij5lyt7" path="res://bot/bot.gd" id="1_nx0rv"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7n4ph"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nx0rv"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n8o8f"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7n4ph"]
+points = PackedVector3Array(0, 0, 0, -2, -2, -5, 2, -2, -5, 2, 2, -5, -2, 2, -5)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mo174"]
+radius = 0.6
+height = 2.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_nx0rv"]
+size = Vector3(0.8, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7wc0h"]
+albedo_color = Color(0.96278375, 0.84141093, 0, 1)
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=930470940]
+script = ExtResource("1_nx0rv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2137684227]
+mesh = SubResource("CapsuleMesh_7n4ph")
+surface_material_override/0 = SubResource("StandardMaterial3D_nx0rv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=734482147]
+shape = SubResource("CapsuleShape3D_n8o8f")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=890286842]
+
+[node name="DetectionZone" type="Area3D" parent="." unique_id=1822627106]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionZone" unique_id=1340727185]
+shape = SubResource("ConvexPolygonShape3D_7n4ph")
+
+[node name="KillZone" type="Area3D" parent="." unique_id=467032447]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillZone" unique_id=1808312482]
+shape = SubResource("CapsuleShape3D_mo174")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=331052673]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28920984, -0.3967209)
+mesh = SubResource("BoxMesh_nx0rv")
+surface_material_override/0 = SubResource("StandardMaterial3D_7wc0h")
+
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_detection_zone_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_detection_zone_body_exited"]
+[connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]
