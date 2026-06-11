@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c4dn0aim1jbse"]
+
+[ext_resource type="Script" uid="uid://1j14kh1bimfu" path="res://Key/NetworkKey.gd" id="1_ky7jb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mr8qu"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3lwy7"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[node name="NetworkKey" type="StaticBody3D" unique_id=1727063861]
+script = ExtResource("1_ky7jb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=655621652]
+mesh = SubResource("BoxMesh_mr8qu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=884833722]
+shape = SubResource("BoxShape3D_3lwy7")

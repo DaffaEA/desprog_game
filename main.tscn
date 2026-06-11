@@ -2,6 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dgwqnujdsfe25" path="res://bot/bot.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://d4br83jcp5j8t" path="res://Server/Server.tscn" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://c4dn0aim1jbse" path="res://Key/NetworkKey.tscn" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://dmhqku7nb7edr" path="res://UI/control.tscn" id="5_lquwl"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ig7tw"]
 vertices = PackedVector3Array(-24.7232, 0.45, -11, -15.7232, 0.45, -11, -15.4732, 0.45, -12, -13.4732, 0.45, -24.5, -24.7232, 0.45, -24.5, -13.4732, 0.45, -12, 24.5268, 0.45, -12, 24.5268, 0.45, -24.5, -13.4732, 0.45, -0.75, -13.4732, 0.45, -9.75, -15.4732, 0.45, -9.75, -24.7232, 0.45, -0.75, 14.0268, 0.45, -0.75, 14.0268, 0.45, -9.75, 16.0268, 0.45, -0.75, 16.2768, 0.45, 0.25, 24.5268, 0.45, 0.25, 24.5268, 0.45, -9.75, 16.0268, 0.45, 1.25, 14.7768, 0.45, 13.5, 24.5268, 0.45, 13.5, 14.5268, 0.45, 1.25, -24.7232, 0.45, 14, -15.2232, 0.45, 14, -14.9732, 0.45, 13.5, -13.7232, 0.45, 1.25, -24.7232, 0.45, 1.25, -13.4732, 0.45, 13.5, -14.9732, 0.45, 14.75, -24.7232, 0.45, 24.5, -13.7232, 0.45, 24.5, -13.4732, 0.45, 14.75, 24.5268, 0.45, 24.5, 24.5268, 0.45, 14.75)
@@ -21,7 +24,6 @@ shadow_enabled = true
 
 [node name="ProtoController" parent="." unique_id=66085999 groups=["player"] instance=ExtResource("1_ig7tw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 1.4000001, 22.2)
-input_forward = "move_forward"
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1214415210]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.023199461, 0, 0)
@@ -54,6 +56,10 @@ material = SubResource("StandardMaterial3D_h2yge")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.799999, 1.6, -3.1999998)
 collision_layer = 2
 
+[node name="CharacterBody3D4" parent="." unique_id=1531868242 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39999866, 1.6, 7.200001)
+collision_layer = 2
+
 [node name="CharacterBody3D2" parent="." unique_id=1168174753 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 1.1, -18.5)
 collision_layer = 2
@@ -61,3 +67,11 @@ collision_layer = 2
 [node name="CharacterBody3D3" parent="." unique_id=952016747 instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.7, 1.1, 17.800001)
 collision_layer = 2
+
+[node name="Server" parent="." unique_id=849021609 instance=ExtResource("4_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7, 0.6, 19.9)
+
+[node name="NetworkKey" parent="." unique_id=1727063861 instance=ExtResource("5_7mycd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.300001, 0.2, -21.2)
+
+[node name="CanvasLayer" parent="." unique_id=175347954 instance=ExtResource("5_lquwl")]

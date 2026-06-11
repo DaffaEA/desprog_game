@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dmhqku7nb7edr"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=175347954]
+
+[node name="InteractPrompt" type="Label" parent="." unique_id=1024322972]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=920613494]
+offset_right = 40.0
+offset_bottom = 40.0
