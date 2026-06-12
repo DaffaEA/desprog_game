@@ -10,9 +10,14 @@ var current_state = State.PATROL
 var player = null
 
 @onready var nav_agent = $NavigationAgent3D
+@onready var mesh_instance: MeshInstance3D = $MeshInstance3D
+
+var _chase_color := Color(1, 1, 0)
+var _patrol_color := Color(1, 0, 0)
 
 func _ready():
-	# Wait for navigation map to load
+	var mat = mesh_instance.get_surface_override_material(0).duplicate()
+	mesh_instance.set_surface_override_material(0, mat)
 	await get_tree().process_frame
 	set_new_patrol_point()
 
@@ -70,13 +75,19 @@ func _on_detection_zone_body_entered(body):
 	if body.is_in_group("player"):
 		player = body
 		current_state = State.CHASE
+		mesh_instance.get_surface_override_material(0).albedo_color = _chase_color
 
 func _on_detection_zone_body_exited(body):
 	if body.is_in_group("player"):
 		current_state = State.PATROL
-		set_new_patrol_point() # Resume patrol immediately
+		mesh_instance.get_surface_override_material(0).albedo_color = _patrol_color
+		set_new_patrol_point()
 
 func _on_kill_zone_body_entered(body):
 	if body.is_in_group("player"):
 		print("Player Died!")
-		get_tree().reload_current_scene()
+		var hud = get_tree().root.find_child("CanvasLayer", true, false)
+		if hud and hud.has_method("show_death_screen"):
+			hud.show_death_screen()
+		else:
+			get_tree().reload_current_scene()

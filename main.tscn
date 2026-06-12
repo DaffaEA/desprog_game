@@ -75,3 +75,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7, 0.6, 19.9)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.300001, 0.2, -21.2)
 
 [node name="CanvasLayer" parent="." unique_id=175347954 instance=ExtResource("5_lquwl")]
+
+[connection signal="server_rebooted" from="Server" to="CanvasLayer" method="show_win_screen"]

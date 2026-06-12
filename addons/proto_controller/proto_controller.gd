@@ -32,7 +32,7 @@ extends CharacterBody3D
 @onready var interaction_ray : RayCast3D = $Head/RayCast3D 
 ## Path to your HUD labels (Adjust if paths are different)
 @onready var prompt_label : Label = get_tree().root.find_child("InteractPrompt", true, false)
-@onready var progress_bar : TextureProgressBar = get_tree().root.find_child("InteractBar", true, false)
+@onready var progress_bar : ProgressBar = get_tree().root.find_child("InteractBar", true, false)
 
 var mouse_captured : bool = false
 var look_rotation : Vector2
@@ -41,6 +41,8 @@ var freeflying : bool = false
 
 # GAME STATE
 var has_network_key : bool = false
+var pickup_msg_timer: float = 0.0
+var is_dead: bool = false
 
 ## IMPORTANT REFERENCES
 @onready var head: Node3D = $Head
@@ -68,6 +70,16 @@ func _process(delta: float) -> void:
 	handle_interaction(delta)
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
+	
+	if global_position.y < -10:
+		is_dead = true
+		var hud = get_tree().root.find_child("CanvasLayer", true, false)
+		if hud and hud.has_method("show_death_screen"):
+			hud.show_death_screen()
+		return
+	
 	if can_freefly and freeflying:
 		var input_dir := Input.get_vector(input_left, input_right, input_forward, input_back)
 		var motion := (head.global_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -100,14 +112,24 @@ func _physics_process(delta: float) -> void:
 
 ## INTERACTION SYSTEM LOGIC
 func handle_interaction(delta: float):
+	if pickup_msg_timer > 0:
+		pickup_msg_timer -= delta
+		if pickup_msg_timer <= 0:
+			clear_hud()
+		return
+	
 	if interaction_ray.is_colliding():
 		var obj = interaction_ray.get_collider()
 		
-		# 1. Handle Pickable Items (Instant)
 		if obj.has_method("interact"):
 			update_hud(obj.item_name if "item_name" in obj else "Item", false)
 			if Input.is_action_just_pressed(input_interact):
 				obj.interact(self)
+				var hud = get_tree().root.find_child("CanvasLayer", true, false)
+				if hud and hud.has_method("update_key_status"):
+					hud.update_key_status(true)
+				update_hud("Picked up " + (obj.item_name if "item_name" in obj else "Item"), false)
+				pickup_msg_timer = 2.0
 		
 		# 2. Handle Hold Interactions (Server)
 		elif obj.has_method("interact_hold"):
