@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bf001fuse0001"]
+
+[ext_resource type="Script" path="res://Fuse/Fuse.gd" id="1_fuse"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fuse"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fuse"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[node name="Fuse" type="StaticBody3D"]
+script = ExtResource("1_fuse")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_fuse")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_fuse")

@@ -45,14 +45,41 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 text = "00:00"
 
-[node name="KeyLabel" type="Label" parent="."]
+[node name="StatusFuse" type="Label" parent="."]
 offset_left = 10.0
-offset_right = 120.0
+offset_right = 160.0
 offset_top = 10.0
 offset_bottom = 35.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
+text = "Fuse: No"
+
+[node name="StatusPower" type="Label" parent="."]
+offset_left = 10.0
+offset_right = 160.0
+offset_top = 30.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Power: No"
+
+[node name="StatusKey" type="Label" parent="."]
+offset_left = 10.0
+offset_right = 160.0
+offset_top = 50.0
+offset_bottom = 75.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
 text = "Key: No"
+
+[node name="StatusServer" type="Label" parent="."]
+offset_left = 10.0
+offset_right = 160.0
+offset_top = 70.0
+offset_bottom = 95.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Server: No"
 
 [node name="WinLabel" type="Label" parent="."]
 anchor_right = 1.0

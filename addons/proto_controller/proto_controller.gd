@@ -40,7 +40,6 @@ var move_speed : float = 0.0
 var freeflying : bool = false
 
 # GAME STATE
-var has_network_key : bool = false
 var pickup_msg_timer: float = 0.0
 var is_dead: bool = false
 
@@ -126,8 +125,8 @@ func handle_interaction(delta: float):
 			if Input.is_action_just_pressed(input_interact):
 				obj.interact(self)
 				var hud = get_tree().root.find_child("CanvasLayer", true, false)
-				if hud and hud.has_method("update_key_status"):
-					hud.update_key_status(true)
+				if hud and hud.has_method("update_status"):
+					hud.update_status()
 				update_hud("Picked up " + (obj.item_name if "item_name" in obj else "Item"), false)
 				pickup_msg_timer = 2.0
 		
